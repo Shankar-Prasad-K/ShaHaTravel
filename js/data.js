@@ -274,26 +274,6 @@ const TICKETS = [
       },
       {
         "no": 2,
-        "name": "KARTHI THANGAVEL",
-        "age": "29",
-        "gender": "M",
-        "status": "CNF",
-        "coach": "S7",
-        "seat": "59",
-        "position": "UPPER"
-      },
-      {
-        "no": 3,
-        "name": "VASANTHI",
-        "age": "60",
-        "gender": "F",
-        "status": "CNF",
-        "coach": "S7",
-        "seat": "57",
-        "position": "LOWER"
-      },
-      {
-        "no": 4,
         "name": "MARAGATHAM P",
         "age": "65",
         "gender": "F",
@@ -303,7 +283,7 @@ const TICKETS = [
         "position": "LOWER"
       },
       {
-        "no": 5,
+        "no": 3,
         "name": "PURUSOTH P",
         "age": "32",
         "gender": "M",
