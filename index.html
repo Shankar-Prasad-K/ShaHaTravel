@@ -16,11 +16,12 @@
   --ink:#2b2013;
   --ink-soft:#5b4d38;
   --maroon:#6d1220;
-  --maroon-dark:#4a0c15;
+  --maroon-dark:#42090f;
   --gold:#B8862A;
   --gold-light:#D4AF37;
-  --line:rgba(109,18,32,0.18);
-  --card-shadow:0 4px 18px rgba(90,50,20,0.10);
+  --gold-pale:#F0DFA8;
+  --line:rgba(109,18,32,0.16);
+  --card-shadow:0 6px 22px rgba(90,50,20,0.12);
 }
 
 html,body{
@@ -32,68 +33,192 @@ html,body{
 }
 body{
   background-image:
-    radial-gradient(ellipse at 10% 0%, rgba(184,134,42,0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 15%, rgba(109,18,32,0.05) 0%, transparent 55%);
+    linear-gradient(135deg, rgba(184,134,42,0.035) 25%, transparent 25%, transparent 75%, rgba(184,134,42,0.035) 75%),
+    linear-gradient(45deg, rgba(184,134,42,0.035) 25%, transparent 25%, transparent 75%, rgba(184,134,42,0.035) 75%),
+    radial-gradient(ellipse at 10% 0%, rgba(184,134,42,0.09) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 15%, rgba(109,18,32,0.07) 0%, transparent 55%);
+  background-size:30px 30px,30px 30px,auto,auto;
+  background-position:0 0,15px 15px,0 0,0 0;
 }
 
-.wrap{max-width:920px;margin:0 auto;padding:28px 18px 80px;}
+.wrap{max-width:960px;margin:0 auto;padding:32px 18px 80px;}
+svg.icon{width:15px;height:15px;flex:0 0 auto;vertical-align:-2px;}
 
 /* ══ HEADER ══ */
-header{text-align:center;padding:10px 0 22px;border-bottom:2px solid var(--line);margin-bottom:26px;}
+header{text-align:center;padding:6px 0 22px;margin-bottom:20px;position:relative;}
+header::after{
+  content:'';display:block;width:min(340px,80%);height:1px;margin:20px auto 0;
+  background:linear-gradient(90deg,transparent,var(--gold-light) 20%,var(--gold) 50%,var(--gold-light) 80%,transparent);
+}
+.hdr-crest{font-size:22px;color:var(--gold);margin-bottom:6px;}
 .hdr-names{
   font-family:'Cinzel',serif;font-weight:600;
-  font-size:clamp(20px,4vw,30px);letter-spacing:0.04em;
+  font-size:clamp(22px,4.4vw,32px);letter-spacing:0.04em;
   color:var(--maroon);
 }
 .hdr-title{
   font-family:'Cinzel',serif;font-weight:500;
-  font-size:clamp(12px,2vw,14px);letter-spacing:0.28em;text-transform:uppercase;
-  color:var(--gold);margin-top:8px;
+  font-size:clamp(12px,2vw,14px);letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--gold);margin-top:9px;
 }
-.hdr-sub{font-size:clamp(13px,2vw,15px);color:var(--ink-soft);margin-top:10px;font-style:italic;}
+.hdr-sub{font-size:clamp(13px,2vw,15px);color:var(--ink-soft);margin-top:11px;font-style:italic;}
 
 /* ══ SEARCH ══ */
 #search-box{
   position:sticky;top:0;z-index:20;
-  background:var(--cream);padding:14px 0 10px;
-  border-bottom:1px solid var(--line);margin-bottom:22px;
+  background:var(--cream);padding:16px 0 12px;
+  margin-bottom:8px;
+}
+#search-box::before{
+  content:'';position:absolute;inset:0 -18px auto -18px;height:100%;
+  background:var(--cream);z-index:-1;
+}
+.search-shell{
+  position:relative;box-shadow:var(--card-shadow);border-radius:10px;
 }
 #search-input{
-  width:100%;padding:13px 18px;
-  font-family:'Cormorant Garamond',serif;font-size:17px;
-  border:1.5px solid var(--gold);border-radius:6px;
+  width:100%;padding:15px 46px 15px 46px;
+  font-family:'Cormorant Garamond',serif;font-size:18px;
+  border:1.5px solid var(--gold-light);border-radius:10px;
   background:#fff;color:var(--ink);
-  outline:none;
+  outline:none;transition:border-color 0.25s, box-shadow 0.25s;
 }
-#search-input:focus{border-color:var(--maroon);box-shadow:0 0 0 3px rgba(109,18,32,0.08);}
-#search-count{font-size:12px;color:var(--ink-soft);margin-top:6px;text-align:center;min-height:16px;}
-mark{background:var(--gold-light);color:var(--maroon-dark);padding:0 2px;border-radius:2px;}
+#search-input:focus{border-color:var(--maroon);box-shadow:0 0 0 3px rgba(109,18,32,0.09);}
+.search-icon{
+  position:absolute;left:16px;top:50%;transform:translateY(-50%);
+  color:var(--gold);width:19px;height:19px;pointer-events:none;
+}
+#search-clear{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--ink-soft);font-size:20px;line-height:1;
+  cursor:pointer;padding:4px 8px;display:none;
+}
+#search-clear.show{display:block;}
+#search-count{font-size:12.5px;color:var(--ink-soft);margin-top:9px;text-align:center;min-height:16px;letter-spacing:0.02em;}
+mark{background:var(--gold-light);color:var(--maroon-dark);padding:1px 3px;border-radius:3px;}
+
+/* ══ SEARCH RESULTS — boarding-pass style cards ══ */
+#search-results{display:none;margin-bottom:10px;}
+#search-results.show{display:block;}
+.result-heading{
+  font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--maroon);margin:18px 0 12px;display:flex;align-items:center;gap:8px;
+}
+.no-results{
+  text-align:center;padding:30px 20px;color:var(--ink-soft);font-style:italic;
+  background:#fff;border-radius:10px;box-shadow:var(--card-shadow);margin-top:6px;
+}
+
+.ticket-card{
+  background:#fff;border-radius:12px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(90,40,20,0.16);
+  margin-bottom:20px;
+  border:1px solid var(--line);
+  animation:riseIn 0.4s ease both;
+}
+@keyframes riseIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.ticket-band{
+  background:linear-gradient(120deg,var(--maroon) 0%,var(--maroon-dark) 100%);
+  color:var(--cream);padding:14px 20px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
+  position:relative;
+}
+.ticket-band::after{
+  content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:repeating-linear-gradient(90deg,var(--gold-light) 0 6px,transparent 6px 12px);
+}
+.ticket-train{
+  font-family:'Cinzel',serif;font-weight:600;font-size:14px;
+  display:flex;align-items:center;gap:7px;color:var(--gold-pale);
+}
+.ticket-dir{
+  font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+  background:rgba(255,255,255,0.12);padding:4px 10px;border-radius:20px;color:var(--cream);
+}
+
+.ticket-body{padding:20px 22px;}
+.ticket-name{
+  font-family:'Cinzel',serif;font-weight:600;font-size:clamp(18px,3vw,22px);
+  color:var(--ink);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+.ticket-name .agesex{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--ink-soft);font-weight:400;}
+
+.ticket-route-line{
+  margin:10px 0 16px;font-size:15px;color:var(--maroon);font-weight:600;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.ticket-route-line .rarrow{color:var(--gold);}
+
+.ticket-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px 10px;
+  padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.tf{display:flex;flex-direction:column;gap:3px;}
+.tf-label{
+  font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);
+  display:flex;align-items:center;gap:5px;
+}
+.tf-label svg{color:var(--gold);}
+.tf-val{font-size:15.5px;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
+.tf-val.hi{color:var(--maroon);font-size:17px;}
+
+.ticket-pnr{
+  margin-top:14px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.05em;color:var(--ink-soft);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
+}
+.ticket-pnr b{color:var(--maroon);font-size:15px;letter-spacing:0.04em;}
+.ticket-quota{color:var(--gold);font-weight:600;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;}
+
+.ticket-mates{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);}
+.tm-label{
+  font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);
+  display:flex;align-items:center;gap:5px;margin-bottom:7px;
+}
+.tm-label svg{color:var(--gold);}
+.tm-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.tm-chip{
+  background:var(--cream2);color:var(--ink);font-size:12.5px;font-weight:600;
+  padding:5px 11px;border-radius:20px;border:1px solid var(--line);
+}
+
+/* ══ FILTER CHIPS (browse view) ══ */
+#filters{display:flex;gap:8px;margin:18px 0 4px;flex-wrap:wrap;}
+.chip-btn{
+  font-family:'Cinzel',serif;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;
+  padding:8px 16px;border-radius:20px;border:1.5px solid var(--gold-light);
+  background:#fff;color:var(--maroon);cursor:pointer;transition:all 0.2s;
+}
+.chip-btn.active{background:var(--maroon);color:var(--cream);border-color:var(--maroon);}
+.chip-btn:hover:not(.active){background:var(--cream2);}
 
 /* ══ OVERVIEW ══ */
 .section-title{
   font-family:'Cinzel',serif;font-weight:600;font-size:clamp(15px,2.4vw,18px);
   letter-spacing:0.1em;text-transform:uppercase;color:var(--maroon);
-  margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--gold-light);
-  display:flex;align-items:center;gap:10px;
+  margin:36px 0 14px;padding-bottom:9px;border-bottom:2px solid var(--gold-light);
+  display:flex;align-items:center;gap:9px;
 }
-#overview{overflow-x:auto;border-radius:8px;box-shadow:var(--card-shadow);}
-#overview table{width:100%;border-collapse:collapse;background:#fff;font-size:14px;min-width:640px;}
+#overview{overflow-x:auto;border-radius:10px;box-shadow:var(--card-shadow);}
+#overview table{width:100%;border-collapse:collapse;background:#fff;font-size:14px;min-width:680px;}
 #overview th{
-  background:var(--maroon);color:var(--cream);
+  background:linear-gradient(120deg,var(--maroon) 0%,var(--maroon-dark) 100%);color:var(--cream);
   font-family:'Cinzel',serif;font-weight:500;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
-  padding:10px 12px;text-align:left;white-space:nowrap;
+  padding:11px 14px;text-align:left;white-space:nowrap;
 }
-#overview td{padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;}
+#overview td{padding:11px 14px;border-bottom:1px solid var(--line);white-space:nowrap;}
 #overview tr:last-child td{border-bottom:none;}
 #overview tr:hover td{background:var(--cream2);}
 
-/* ══ TRAIN GROUP ══ */
+/* ══ TRAIN GROUP (browse view) ══ */
 .train-card{
-  background:#fff;border-radius:10px;box-shadow:var(--card-shadow);
-  margin-bottom:24px;overflow:hidden;border:1px solid var(--line);
+  background:#fff;border-radius:12px;box-shadow:var(--card-shadow);
+  margin-bottom:22px;overflow:hidden;border:1px solid var(--line);
+  transition:opacity 0.2s;
 }
+.train-card.hidden{display:none;}
 .train-head{
-  background:linear-gradient(135deg,var(--maroon) 0%,var(--maroon-dark) 100%);
+  background:linear-gradient(120deg,var(--maroon) 0%,var(--maroon-dark) 100%);
   color:var(--cream);padding:16px 20px;
 }
 .train-route{
@@ -102,7 +227,7 @@ mark{background:var(--gold-light);color:var(--maroon-dark);padding:0 2px;border-
 }
 .train-route .arrow{color:var(--gold-light);}
 .train-meta{
-  margin-top:8px;font-size:13px;color:rgba(251,246,236,0.85);
+  margin-top:9px;font-size:13px;color:rgba(251,246,236,0.85);
   display:flex;gap:18px;flex-wrap:wrap;
 }
 .train-meta b{color:var(--gold-light);font-weight:600;}
@@ -128,14 +253,17 @@ table.pax td{padding:8px 10px;border-bottom:1px solid var(--line);font-variant-n
 table.pax tr:last-child td{border-bottom:none;}
 table.pax .pax-name{font-weight:600;color:var(--ink);}
 table.pax .coach-seat{color:var(--maroon);font-weight:600;}
-.pnr-block.no-match{display:none;}
 
-footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;font-style:italic;}
+#browse-view.hidden{display:none;}
 
-@media(max-width:520px){
+footer{text-align:center;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;font-style:italic;}
+
+@media(max-width:560px){
+  .ticket-grid{grid-template-columns:repeat(2,1fr);}
   .train-meta{gap:10px;font-size:12px;}
   .pnr-block{padding:14px 14px;}
   .train-head{padding:14px 16px;}
+  .ticket-body{padding:18px 16px;}
 }
 </style>
 </head>
@@ -143,45 +271,69 @@ footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid v
 
 <div class="wrap">
   <header>
+    <div class="hdr-crest">✦</div>
     <div class="hdr-names">Shankar Prasad &amp; Haripriya</div>
     <div class="hdr-title">Travel Itinerary for Guests</div>
     <div class="hdr-sub">Wedding: 20 Nov 2026, Coimbatore &nbsp;·&nbsp; Reception: 20 Nov 2026 evening</div>
   </header>
 
   <div id="search-box">
-    <input id="search-input" type="text" placeholder="🔍 Type your name to find your train, coach &amp; seat…" autocomplete="off"/>
+    <div class="search-shell">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></svg>
+      <input id="search-input" type="text" placeholder="Type your name to find your ticket…" autocomplete="off"/>
+      <button id="search-clear" aria-label="Clear search">×</button>
+    </div>
     <div id="search-count"></div>
   </div>
 
-  <div class="section-title">✦ Quick Overview — All Trains</div>
-  <div id="overview"></div>
+  <div id="search-results"></div>
 
-  <div class="section-title">🚂 Towards Coimbatore</div>
-  <div id="towards-groups"></div>
+  <div id="browse-view">
+    <div id="filters">
+      <button class="chip-btn active" data-filter="all">All Trains</button>
+      <button class="chip-btn" data-filter="towards">Towards Coimbatore</button>
+      <button class="chip-btn" data-filter="return">Return Journey</button>
+    </div>
 
-  <div class="section-title">🚂 Return Journey</div>
-  <div id="return-groups"></div>
+    <div class="section-title" id="overview-title" data-section="all">✦ Quick Overview</div>
+    <div id="overview"></div>
+
+    <div class="section-title" data-section="towards">🚂 Towards Coimbatore</div>
+    <div id="towards-groups"></div>
+
+    <div class="section-title" data-section="return">🚂 Return Journey</div>
+    <div id="return-groups"></div>
+  </div>
 
   <footer>Please carry a valid original photo ID matching your ticket while travelling.<br/>Double-check departure times closer to the date — railways can revise schedules.</footer>
 </div>
 
 <script src="js/data.js"></script>
 <script>
+const ICONS = {
+  calendar:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 9.5h17"/><path d="M8 3v4M16 3v4"/></svg>',
+  depart:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
+  seat:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4v9a2 2 0 002 2h7"/><path d="M6 13H4a1 1 0 00-1 1v2a1 1 0 001 1h2"/><path d="M15 15v4a1 1 0 001 1h3a1 1 0 001-1v-2"/></svg>',
+  berth:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17h18M3 17v-4h18v4M6 13V9a2 2 0 012-2h8a2 2 0 012 2v4"/></svg>',
+  klass:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9a2 2 0 012-2h14a2 2 0 012 2v1.5a1.5 1.5 0 000 3V16a2 2 0 01-2 2H5a2 2 0 01-2-2v-2.5a1.5 1.5 0 000-3z"/></svg>',
+  train:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="13" rx="4"/><path d="M4 11h16"/><circle cx="8.5" cy="17.3" r="1.2" fill="currentColor" stroke="none"/><circle cx="15.5" cy="17.3" r="1.2" fill="currentColor" stroke="none"/><path d="M6.5 20l-2 2M17.5 20l2 2"/></svg>',
+  users:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M2.5 19c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5"/><path d="M16 8a3 3 0 100-6"/><path d="M17.5 13.6c2.3.6 3.9 2.5 3.9 5.4"/></svg>',
+};
+
 function groupByTrain(list){
-  const order = [];
-  const map = new Map();
+  const order = []; const map = new Map();
   for(const t of list){
     if(!map.has(t.train_no)){ map.set(t.train_no, []); order.push(t.train_no); }
     map.get(t.train_no).push(t);
   }
   return order.map(no => ({train_no:no, tickets:map.get(no)}));
 }
-
 function fmtDate(d){
   if(!d) return '';
   const parts = d.split('-');
   return parts.length===3 ? `${parts[0]} ${parts[1]} ${parts[2]}` : d;
 }
+function shortStation(s){ return s.replace(/\s*\([A-Z]+\)/,''); }
 
 function renderPaxTable(passengers){
   let rows = passengers.map(p => `
@@ -214,9 +366,7 @@ function renderTrainCard(group){
 
   return `<div class="train-card" data-train="${group.train_no}">
     <div class="train-head">
-      <div class="train-route">
-        ${first.origin} <span class="arrow">→</span> ${first.destination}
-      </div>
+      <div class="train-route">${first.origin} <span class="arrow">→</span> ${first.destination}</div>
       <div class="train-meta">
         <span><b>Train</b> ${first.train_no} ${first.train_name}</span>
         <span><b>Date</b> ${fmtDate(first.departure_date)}</span>
@@ -233,23 +383,20 @@ function renderTrainCard(group){
 const towards = TICKETS.filter(t => t.group === 'towards');
 const ret = TICKETS.filter(t => t.group === 'return');
 
-document.getElementById('towards-groups').innerHTML =
-  groupByTrain(towards).map(renderTrainCard).join('');
-document.getElementById('return-groups').innerHTML =
-  groupByTrain(ret).map(renderTrainCard).join('');
+document.getElementById('towards-groups').innerHTML = groupByTrain(towards).map(renderTrainCard).join('');
+document.getElementById('return-groups').innerHTML = groupByTrain(ret).map(renderTrainCard).join('');
 
-// Overview table
 function overviewRows(list, label){
   return groupByTrain(list).map(g => {
     const f = g.tickets[0];
     const totalPax = g.tickets.reduce((s,t)=>s+t.passengers.length,0);
     return `<tr>
       <td>${label}</td>
-      <td>${f.origin.replace(/\s*\([A-Z]+\)/,'')} → ${f.destination.replace(/\s*\([A-Z]+\)/,'')}</td>
+      <td>${shortStation(f.origin)} → ${shortStation(f.destination)}</td>
       <td>${f.train_no} ${f.train_name}</td>
       <td>${fmtDate(f.departure_date)}</td>
       <td>${f.departure_time} → ${f.arrival_time}</td>
-      <td>${f.class.replace(/\s*\([A-Z]+\)/,'')}</td>
+      <td>${shortStation(f.class)}</td>
       <td>${totalPax}</td>
     </tr>`;
   }).join('');
@@ -259,31 +406,98 @@ document.getElementById('overview').innerHTML = `<table>
   <tbody>${overviewRows(towards,'Towards CBE')}${overviewRows(ret,'Return')}</tbody>
 </table>`;
 
-// Search
-const searchInput = document.getElementById('search-input');
-const searchCount = document.getElementById('search-count');
-searchInput.addEventListener('input', () => {
-  const q = searchInput.value.trim().toUpperCase();
-  document.querySelectorAll('mark').forEach(m => {
-    m.outerHTML = m.textContent;
-  });
-  let matches = 0;
-  document.querySelectorAll('.pnr-block').forEach(block => {
-    if(!q){ block.classList.remove('no-match'); return; }
-    let found = false;
-    block.querySelectorAll('tr[data-name]').forEach(row => {
-      const name = row.getAttribute('data-name');
-      if(name.toUpperCase().includes(q)){
-        found = true; matches++;
-        const cell = row.querySelector('.pax-name');
-        const idx = name.toUpperCase().indexOf(q);
-        cell.innerHTML = name.slice(0,idx) + '<mark>' + name.slice(idx,idx+q.length) + '</mark>' + name.slice(idx+q.length);
-      }
+/* ═══ Filter chips (browse view) ═══ */
+document.querySelectorAll('.chip-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.chip-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('[data-section]').forEach(el=>{
+      el.style.display = (f==='all' || el.dataset.section===f) ? '' : 'none';
     });
-    block.classList.toggle('no-match', !found);
+    document.getElementById('overview').style.display = (f==='all') ? '' : 'none';
+    document.getElementById('towards-groups').style.display = (f==='all'||f==='towards') ? '' : 'none';
+    document.getElementById('return-groups').style.display = (f==='all'||f==='return') ? '' : 'none';
   });
-  searchCount.textContent = q ? `${matches} match${matches!==1?'es':''} found` : '';
 });
+
+/* ═══ Rich search — builds a boarding-pass style card per match ═══ */
+const PASSENGER_INDEX = [];
+TICKETS.forEach(t => t.passengers.forEach(p => PASSENGER_INDEX.push({p, t})));
+
+function highlight(name, q){
+  const idx = name.toUpperCase().indexOf(q);
+  if(idx < 0) return name;
+  return name.slice(0,idx) + '<mark>' + name.slice(idx,idx+q.length) + '</mark>' + name.slice(idx+q.length);
+}
+
+function renderTicketCard(entry, q){
+  const {p, t} = entry;
+  const mates = t.passengers.filter(m => m.no !== p.no);
+  return `<div class="ticket-card">
+    <div class="ticket-band">
+      <div class="ticket-train">${ICONS.train}${t.train_no} · ${t.train_name}</div>
+      <div class="ticket-dir">${t.direction}</div>
+    </div>
+    <div class="ticket-body">
+      <div class="ticket-name">${highlight(p.name,q)} <span class="agesex">${p.age} yrs · ${p.gender==='M'?'Male':'Female'}</span></div>
+      <div class="ticket-route-line">${shortStation(t.origin)} <span class="rarrow">✈ →</span> ${shortStation(t.destination)}</div>
+      <div class="ticket-grid">
+        <div class="tf"><div class="tf-label">${ICONS.calendar}Date</div><div class="tf-val">${fmtDate(t.departure_date)}</div></div>
+        <div class="tf"><div class="tf-label">${ICONS.depart}Departs</div><div class="tf-val">${t.departure_time}</div></div>
+        <div class="tf"><div class="tf-label">${ICONS.depart}Arrives</div><div class="tf-val">${t.arrival_time}</div></div>
+        <div class="tf"><div class="tf-label">${ICONS.seat}Coach · Seat</div><div class="tf-val hi">${p.coach} · ${p.seat}</div></div>
+        <div class="tf"><div class="tf-label">${ICONS.berth}Berth</div><div class="tf-val">${p.position || '—'}</div></div>
+        <div class="tf"><div class="tf-label">${ICONS.klass}Class</div><div class="tf-val">${shortStation(t.class)}</div></div>
+      </div>
+      <div class="ticket-pnr">
+        <span>PNR <b>${t.pnr}</b></span>
+        <span class="ticket-quota">${p.status==='CNF'?'✓ Confirmed':p.status}</span>
+      </div>
+      ${mates.length ? `<div class="ticket-mates">
+        <div class="tm-label">${ICONS.users}Travelling with ${p.name.split(' ')[0]}</div>
+        <div class="tm-chips">${mates.map(m=>`<span class="tm-chip">${m.name}</span>`).join('')}</div>
+      </div>` : ''}
+    </div>
+  </div>`;
+}
+
+const searchInput = document.getElementById('search-input');
+const searchClear = document.getElementById('search-clear');
+const searchCount = document.getElementById('search-count');
+const searchResults = document.getElementById('search-results');
+const browseView = document.getElementById('browse-view');
+
+function runSearch(){
+  const q = searchInput.value.trim().toUpperCase();
+  searchClear.classList.toggle('show', q.length>0);
+
+  if(!q){
+    searchResults.classList.remove('show');
+    browseView.classList.remove('hidden');
+    searchCount.textContent = '';
+    return;
+  }
+
+  const matches = PASSENGER_INDEX.filter(e => e.p.name.toUpperCase().includes(q));
+  browseView.classList.add('hidden');
+  searchResults.classList.add('show');
+
+  if(matches.length === 0){
+    searchResults.innerHTML = `<div class="no-results">No passenger found matching "<b>${searchInput.value}</b>".<br/>Check the spelling, or try just the first name.</div>`;
+    searchCount.textContent = '';
+    return;
+  }
+
+  matches.sort((a,b)=> a.t.group==='towards'&&b.t.group!=='towards' ? -1 : (a.t.departure_time>b.t.departure_time?1:-1));
+  searchResults.innerHTML =
+    `<div class="result-heading">✦ ${matches.length} ticket${matches.length>1?'s':''} found</div>` +
+    matches.map(e => renderTicketCard(e,q)).join('');
+  searchCount.textContent = '';
+}
+
+searchInput.addEventListener('input', runSearch);
+searchClear.addEventListener('click', () => { searchInput.value=''; runSearch(); searchInput.focus(); });
 </script>
 </body>
 </html>
