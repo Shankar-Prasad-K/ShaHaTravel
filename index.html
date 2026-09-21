@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Travel Itinerary — Shankar & Haripriya's Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --cream:#FBF6EC;
+  --cream2:#F5EDDC;
+  --ink:#2b2013;
+  --ink-soft:#5b4d38;
+  --maroon:#6d1220;
+  --maroon-dark:#4a0c15;
+  --gold:#B8862A;
+  --gold-light:#D4AF37;
+  --line:rgba(109,18,32,0.18);
+  --card-shadow:0 4px 18px rgba(90,50,20,0.10);
+}
+
+html,body{
+  width:100%;min-height:100%;
+  background:var(--cream);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+body{
+  background-image:
+    radial-gradient(ellipse at 10% 0%, rgba(184,134,42,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 15%, rgba(109,18,32,0.05) 0%, transparent 55%);
+}
+
+.wrap{max-width:920px;margin:0 auto;padding:28px 18px 80px;}
+
+/* ══ HEADER ══ */
+header{text-align:center;padding:10px 0 22px;border-bottom:2px solid var(--line);margin-bottom:26px;}
+.hdr-names{
+  font-family:'Cinzel',serif;font-weight:600;
+  font-size:clamp(20px,4vw,30px);letter-spacing:0.04em;
+  color:var(--maroon);
+}
+.hdr-title{
+  font-family:'Cinzel',serif;font-weight:500;
+  font-size:clamp(12px,2vw,14px);letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--gold);margin-top:8px;
+}
+.hdr-sub{font-size:clamp(13px,2vw,15px);color:var(--ink-soft);margin-top:10px;font-style:italic;}
+
+/* ══ SEARCH ══ */
+#search-box{
+  position:sticky;top:0;z-index:20;
+  background:var(--cream);padding:14px 0 10px;
+  border-bottom:1px solid var(--line);margin-bottom:22px;
+}
+#search-input{
+  width:100%;padding:13px 18px;
+  font-family:'Cormorant Garamond',serif;font-size:17px;
+  border:1.5px solid var(--gold);border-radius:6px;
+  background:#fff;color:var(--ink);
+  outline:none;
+}
+#search-input:focus{border-color:var(--maroon);box-shadow:0 0 0 3px rgba(109,18,32,0.08);}
+#search-count{font-size:12px;color:var(--ink-soft);margin-top:6px;text-align:center;min-height:16px;}
+mark{background:var(--gold-light);color:var(--maroon-dark);padding:0 2px;border-radius:2px;}
+
+/* ══ OVERVIEW ══ */
+.section-title{
+  font-family:'Cinzel',serif;font-weight:600;font-size:clamp(15px,2.4vw,18px);
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--maroon);
+  margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--gold-light);
+  display:flex;align-items:center;gap:10px;
+}
+#overview{overflow-x:auto;border-radius:8px;box-shadow:var(--card-shadow);}
+#overview table{width:100%;border-collapse:collapse;background:#fff;font-size:14px;min-width:640px;}
+#overview th{
+  background:var(--maroon);color:var(--cream);
+  font-family:'Cinzel',serif;font-weight:500;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:10px 12px;text-align:left;white-space:nowrap;
+}
+#overview td{padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;}
+#overview tr:last-child td{border-bottom:none;}
+#overview tr:hover td{background:var(--cream2);}
+
+/* ══ TRAIN GROUP ══ */
+.train-card{
+  background:#fff;border-radius:10px;box-shadow:var(--card-shadow);
+  margin-bottom:24px;overflow:hidden;border:1px solid var(--line);
+}
+.train-head{
+  background:linear-gradient(135deg,var(--maroon) 0%,var(--maroon-dark) 100%);
+  color:var(--cream);padding:16px 20px;
+}
+.train-route{
+  font-family:'Cinzel',serif;font-weight:600;font-size:clamp(14px,2.4vw,17px);
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.train-route .arrow{color:var(--gold-light);}
+.train-meta{
+  margin-top:8px;font-size:13px;color:rgba(251,246,236,0.85);
+  display:flex;gap:18px;flex-wrap:wrap;
+}
+.train-meta b{color:var(--gold-light);font-weight:600;}
+
+.pnr-block{padding:16px 20px;border-top:1px solid var(--line);}
+.pnr-block:first-of-type{border-top:none;}
+.pnr-head{
+  display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;
+  margin-bottom:10px;
+}
+.pnr-label{font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.06em;color:var(--ink-soft);}
+.pnr-label b{color:var(--maroon);font-size:14px;letter-spacing:0.02em;}
+.pax-count{font-size:12px;color:var(--gold);font-weight:600;}
+
+.pax-table-wrap{overflow-x:auto;}
+table.pax{width:100%;border-collapse:collapse;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;min-width:480px;}
+table.pax th{
+  text-align:left;padding:7px 10px;background:var(--cream2);
+  font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-soft);
+  border-bottom:1.5px solid var(--gold-light);
+}
+table.pax td{padding:8px 10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;}
+table.pax tr:last-child td{border-bottom:none;}
+table.pax .pax-name{font-weight:600;color:var(--ink);}
+table.pax .coach-seat{color:var(--maroon);font-weight:600;}
+.pnr-block.no-match{display:none;}
+
+footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;font-style:italic;}
+
+@media(max-width:520px){
+  .train-meta{gap:10px;font-size:12px;}
+  .pnr-block{padding:14px 14px;}
+  .train-head{padding:14px 16px;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="hdr-names">Shankar Prasad &amp; Haripriya</div>
+    <div class="hdr-title">Travel Itinerary for Guests</div>
+    <div class="hdr-sub">Wedding: 20 Nov 2026, Coimbatore &nbsp;·&nbsp; Reception: 20 Nov 2026 evening</div>
+  </header>
+
+  <div id="search-box">
+    <input id="search-input" type="text" placeholder="🔍 Type your name to find your train, coach &amp; seat…" autocomplete="off"/>
+    <div id="search-count"></div>
+  </div>
+
+  <div class="section-title">✦ Quick Overview — All Trains</div>
+  <div id="overview"></div>
+
+  <div class="section-title">🚂 Towards Coimbatore</div>
+  <div id="towards-groups"></div>
+
+  <div class="section-title">🚂 Return Journey</div>
+  <div id="return-groups"></div>
+
+  <footer>Please carry a valid original photo ID matching your ticket while travelling.<br/>Double-check departure times closer to the date — railways can revise schedules.</footer>
+</div>
+
+<script src="js/data.js"></script>
+<script>
+function groupByTrain(list){
+  const order = [];
+  const map = new Map();
+  for(const t of list){
+    if(!map.has(t.train_no)){ map.set(t.train_no, []); order.push(t.train_no); }
+    map.get(t.train_no).push(t);
+  }
+  return order.map(no => ({train_no:no, tickets:map.get(no)}));
+}
+
+function fmtDate(d){
+  if(!d) return '';
+  const parts = d.split('-');
+  return parts.length===3 ? `${parts[0]} ${parts[1]} ${parts[2]}` : d;
+}
+
+function renderPaxTable(passengers){
+  let rows = passengers.map(p => `
+    <tr data-name="${p.name}">
+      <td>${p.no}</td>
+      <td class="pax-name">${p.name}</td>
+      <td>${p.age}${p.gender}</td>
+      <td class="coach-seat">${p.coach}</td>
+      <td class="coach-seat">${p.seat}</td>
+      <td>${p.position || '—'}</td>
+      <td>${p.status}</td>
+    </tr>`).join('');
+  return `<div class="pax-table-wrap"><table class="pax">
+    <thead><tr><th>#</th><th>Name</th><th>Age/Sex</th><th>Coach</th><th>Seat</th><th>Berth</th><th>Status</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>`;
+}
+
+function renderTrainCard(group){
+  const first = group.tickets[0];
+  const totalPax = group.tickets.reduce((s,t)=>s+t.passengers.length,0);
+  const pnrBlocks = group.tickets.map(t => `
+    <div class="pnr-block">
+      <div class="pnr-head">
+        <div class="pnr-label">PNR <b>${t.pnr}</b></div>
+        <div class="pax-count">${t.passengers.length} passenger${t.passengers.length>1?'s':''}</div>
+      </div>
+      ${renderPaxTable(t.passengers)}
+    </div>`).join('');
+
+  return `<div class="train-card" data-train="${group.train_no}">
+    <div class="train-head">
+      <div class="train-route">
+        ${first.origin} <span class="arrow">→</span> ${first.destination}
+      </div>
+      <div class="train-meta">
+        <span><b>Train</b> ${first.train_no} ${first.train_name}</span>
+        <span><b>Date</b> ${fmtDate(first.departure_date)}</span>
+        <span><b>Departs</b> ${first.departure_time}</span>
+        <span><b>Arrives</b> ${first.arrival_time} (${fmtDate(first.arrival_date)})</span>
+        <span><b>Class</b> ${first.class}</span>
+        <span><b>Total</b> ${totalPax} pax</span>
+      </div>
+    </div>
+    ${pnrBlocks}
+  </div>`;
+}
+
+const towards = TICKETS.filter(t => t.group === 'towards');
+const ret = TICKETS.filter(t => t.group === 'return');
+
+document.getElementById('towards-groups').innerHTML =
+  groupByTrain(towards).map(renderTrainCard).join('');
+document.getElementById('return-groups').innerHTML =
+  groupByTrain(ret).map(renderTrainCard).join('');
+
+// Overview table
+function overviewRows(list, label){
+  return groupByTrain(list).map(g => {
+    const f = g.tickets[0];
+    const totalPax = g.tickets.reduce((s,t)=>s+t.passengers.length,0);
+    return `<tr>
+      <td>${label}</td>
+      <td>${f.origin.replace(/\s*\([A-Z]+\)/,'')} → ${f.destination.replace(/\s*\([A-Z]+\)/,'')}</td>
+      <td>${f.train_no} ${f.train_name}</td>
+      <td>${fmtDate(f.departure_date)}</td>
+      <td>${f.departure_time} → ${f.arrival_time}</td>
+      <td>${f.class.replace(/\s*\([A-Z]+\)/,'')}</td>
+      <td>${totalPax}</td>
+    </tr>`;
+  }).join('');
+}
+document.getElementById('overview').innerHTML = `<table>
+  <thead><tr><th>Leg</th><th>Route</th><th>Train</th><th>Date</th><th>Dep → Arr</th><th>Class</th><th>Pax</th></tr></thead>
+  <tbody>${overviewRows(towards,'Towards CBE')}${overviewRows(ret,'Return')}</tbody>
+</table>`;
+
+// Search
+const searchInput = document.getElementById('search-input');
+const searchCount = document.getElementById('search-count');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toUpperCase();
+  document.querySelectorAll('mark').forEach(m => {
+    m.outerHTML = m.textContent;
+  });
+  let matches = 0;
+  document.querySelectorAll('.pnr-block').forEach(block => {
+    if(!q){ block.classList.remove('no-match'); return; }
+    let found = false;
+    block.querySelectorAll('tr[data-name]').forEach(row => {
+      const name = row.getAttribute('data-name');
+      if(name.toUpperCase().includes(q)){
+        found = true; matches++;
+        const cell = row.querySelector('.pax-name');
+        const idx = name.toUpperCase().indexOf(q);
+        cell.innerHTML = name.slice(0,idx) + '<mark>' + name.slice(idx,idx+q.length) + '</mark>' + name.slice(idx+q.length);
+      }
+    });
+    block.classList.toggle('no-match', !found);
+  });
+  searchCount.textContent = q ? `${matches} match${matches!==1?'es':''} found` : '';
+});
+</script>
+</body>
+</html>
