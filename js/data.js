@@ -295,47 +295,6 @@ const TICKETS = [
     ]
   },
   {
-    "file": "Chennai to Coimbatore - Batch 5.txt",
-    "direction": "Towards Coimbatore",
-    "group": "towards",
-    "origin": "MGR CHENNAI CTL (MAS)",
-    "destination": "COIMBATORE JN (CBE)",
-    "start_date": "19-Nov-2026",
-    "departure_time": "13:25",
-    "departure_date": "19-Nov-2026",
-    "arrival_time": "21:27",
-    "arrival_date": "19-Nov-2026",
-    "pnr": "4445141092",
-    "train_no": "22637",
-    "train_name": "WESTCOAST SF EXP",
-    "class": "SLEEPER CLASS (SL)",
-    "quota": "GENERAL (GN)",
-    "distance_km": "497",
-    "booking_date": "20-Sept-2026 21:51:08 HRS",
-    "passengers": [
-      {
-        "no": 1,
-        "name": "SANTHA",
-        "age": "70",
-        "gender": "F",
-        "status": "CNF",
-        "coach": "S1",
-        "seat": "49",
-        "position": "LOWER"
-      },
-      {
-        "no": 2,
-        "name": "KAVITHA",
-        "age": "52",
-        "gender": "F",
-        "status": "CNF",
-        "coach": "S1",
-        "seat": "52",
-        "position": "LOWER"
-      }
-    ]
-  },
-  {
     "file": "Early Morning CHN-CBE.txt",
     "direction": "Towards Coimbatore",
     "group": "towards",
